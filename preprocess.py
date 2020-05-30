@@ -35,7 +35,7 @@ from config import LABELS, VARIATIONS
 from config import ModelConfig
 from utils.data_loader import read_raw_data
 from utils.analysis import analyze_len_distribution, analyze_class_distribution
-from utils.embeddings import train_w2v, train_glove, train_fasttext
+from utils.embeddings import train_w2v, train_fasttext
 from utils.io import pickle_dump, format_filename, write_log
 
 
@@ -308,8 +308,8 @@ def process_data():
         c2v_data = train_w2v(sentences_train+sentences_dev, lambda x: list(x), char_tokenizer.word_index)
         w_fasttext_data = train_fasttext(sentences_train+sentences_dev, lambda x: x.split(), word_tokenizer.word_index)
         c_fasttext_data = train_fasttext(sentences_train+sentences_dev, lambda x: list(x), char_tokenizer.word_index)
-        w_glove_data = train_glove(sentences_train+sentences_dev, lambda x: x.split(), word_tokenizer.word_index)
-        c_glove_data = train_glove(sentences_train+sentences_dev, lambda x: list(x), char_tokenizer.word_index)
+        # w_glove_data = train_glove(sentences_train+sentences_dev, lambda x: x.split(), word_tokenizer.word_index)
+        # c_glove_data = train_glove(sentences_train+sentences_dev, lambda x: list(x), char_tokenizer.word_index)
 
         # save pre-process data
         pickle_dump(format_filename(PROCESSED_DATA_DIR, TRAIN_DATA_TEMPLATE, variation=variation), variation_train_data)
@@ -331,10 +331,10 @@ def process_data():
                                 type='w_fasttext_data'), w_fasttext_data)
         np.save(format_filename(PROCESSED_DATA_DIR, EMBEDDING_MATRIX_TEMPLATE, variation=variation,
                                 type='c_fasttext_data'), c_fasttext_data)
-        np.save(format_filename(PROCESSED_DATA_DIR, EMBEDDING_MATRIX_TEMPLATE, variation=variation,
-                                type='w_glove_data'), w_glove_data)
-        np.save(format_filename(PROCESSED_DATA_DIR, EMBEDDING_MATRIX_TEMPLATE, variation=variation,
-                                type='c_glove_data'), c_glove_data)
+        # np.save(format_filename(PROCESSED_DATA_DIR, EMBEDDING_MATRIX_TEMPLATE, variation=variation,
+                                # type='w_glove_data'), w_glove_data)
+        # np.save(format_filename(PROCESSED_DATA_DIR, EMBEDDING_MATRIX_TEMPLATE, variation=variation,
+                                # type='c_glove_data'), c_glove_data)
 
         pickle_dump(format_filename(PROCESSED_DATA_DIR, TOKENIZER_TEMPLATE, variation=variation, level='word'),
                     word_tokenizer)
