@@ -17,7 +17,8 @@ import os
 import abc
 
 import numpy as np
-from sklearn.externals import joblib
+import joblib
+#from sklearn.externals import joblib
 from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB, BernoulliNB
